@@ -4,8 +4,8 @@ import codingdojo.exception.ConflictException;
 import codingdojo.model.*;
 import codingdojo.repository.PersonRepository;
 import codingdojo.repository.ShoppingListRepository;
-import codingdojo.service.sync.PersonSynchronisationService;
-import codingdojo.service.sync.SyncResult;
+import codingdojo.service.PersonSinchronisationUitls;
+import codingdojo.service.SyncResult;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,14 +20,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class PersonSynchronisationServiceTest {
+public class PersonSinchronisationUitlsTest {
 
     @Mock
     private PersonRepository personRepository;
     @Mock
     private ShoppingListRepository shoppingListRepository;
     @InjectMocks
-    private PersonSynchronisationService personSynchronisationService;
+    private PersonSinchronisationUitls personSinchronisationUitls;
 
     @Test
     void should_sync_natural_person() {
@@ -39,7 +39,7 @@ public class PersonSynchronisationServiceTest {
         when(personRepository.findByExternalId(TestUtils.EXTERNAL_ID)).thenReturn(person);
 
         // When
-        SyncResult result = personSynchronisationService.synchronise(externalPerson);
+        SyncResult result = PersonSinchronisationUitls.sinchronise(externalPerson);
 
         // Then
         assertSame(SyncResult.UPDATED, result);
@@ -53,7 +53,7 @@ public class PersonSynchronisationServiceTest {
         ExternalPerson externalPerson = createExternalPerson();
 
         // When
-        SyncResult result = personSynchronisationService.synchronise(externalPerson);
+        SyncResult result = PersonSinchronisationUitls.sinchronise(externalPerson);
 
         // Then
         assertSame(SyncResult.CREATED, result);
@@ -70,7 +70,7 @@ public class PersonSynchronisationServiceTest {
         when(personRepository.findByExternalId(TestUtils.EXTERNAL_ID)).thenReturn(person);
 
         // When
-        ConflictException conflictException = assertThrows(ConflictException.class, () -> personSynchronisationService.synchronise(externalPerson));
+        ConflictException conflictException = assertThrows(ConflictException.class, () -> PersonSinchronisationUitls.sinchronise(externalPerson));
 
         // Then
         assertEquals("Existing customer for externalCustomer 12345 already exists and is not a person", conflictException.getMessage());

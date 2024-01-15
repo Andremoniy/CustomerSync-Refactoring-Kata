@@ -1,4 +1,4 @@
-package codingdojo.service.data;
+package codingdojo.service;
 
 import codingdojo.model.ShoppingList;
 import codingdojo.repository.ShoppingListRepository;

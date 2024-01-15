@@ -1,4 +1,4 @@
-package codingdojo.service.sync;
+package codingdojo.service;
 
 import codingdojo.exception.ConflictException;
 import codingdojo.model.CustomerType;
@@ -6,15 +6,13 @@ import codingdojo.model.ExternalPerson;
 import codingdojo.model.Person;
 import codingdojo.repository.PersonRepository;
 import codingdojo.repository.ShoppingListRepository;
-import codingdojo.service.data.CustomerMatches;
-import codingdojo.service.data.PersonRepositoryService;
 
-public class PersonSynchronisationService {
+public class PersonSinchronisationUitls {
 
-    private final PersonRepositoryService personRepositoryService;
-    private final BaseSynchronisationService<ExternalPerson, Person> personSynchronisationService;
+    private static PersonRepositoryService personRepositoryService;
+    private static BaseSynchronisationService<ExternalPerson, Person> personSynchronisationService;
 
-    public PersonSynchronisationService(PersonRepository personRepository, ShoppingListRepository shoppingListRepository) {
+    public PersonSinchronisationUitls(PersonRepository personRepository, ShoppingListRepository shoppingListRepository) {
         personRepositoryService = new PersonRepositoryService(personRepository);
         personSynchronisationService = new BaseSynchronisationService<>(
                 shoppingListRepository,
@@ -24,7 +22,7 @@ public class PersonSynchronisationService {
         );
     }
 
-    public SyncResult synchronise(ExternalPerson externalPerson) {
+    public static SyncResult sinchronise(ExternalPerson externalPerson) {
         final CustomerMatches<Person> customerMatches = personRepositoryService.loadPerson(externalPerson.getExternalId());
         validateCustomerType(externalPerson.getExternalId(), customerMatches);
         return personSynchronisationService.synchronise(externalPerson, customerMatches);

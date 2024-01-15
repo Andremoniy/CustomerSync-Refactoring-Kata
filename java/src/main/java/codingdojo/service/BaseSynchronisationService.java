@@ -1,13 +1,7 @@
-package codingdojo.service.sync;
+package codingdojo.service;
 
-import codingdojo.model.Customer;
-import codingdojo.model.ExternalCustomer;
-import codingdojo.model.ShoppingList;
+import codingdojo.model.*;
 import codingdojo.repository.ShoppingListRepository;
-import codingdojo.service.CustomerFactory;
-import codingdojo.service.data.CustomerMatches;
-import codingdojo.service.data.CustomerRepositoryService;
-import codingdojo.service.data.ShoppingListRepositoryService;
 
 import java.util.List;
 
@@ -52,7 +46,12 @@ public class BaseSynchronisationService<ExternalCustomerT extends ExternalCustom
     }
 
     private CustomerT newCustomer(ExternalCustomerT externalCustomer) {
-        final CustomerT customer = customerFactory.build();
+        CustomerT customer;
+        if (customerFactory.build() instanceof Person) {
+            customer = (CustomerT) new Person();
+        } else {
+            customer = (CustomerT) new Company();
+        }
         customer.setExternalId(externalCustomer.getExternalId());
         customer.setMasterExternalId(externalCustomer.getExternalId());
         return customer;

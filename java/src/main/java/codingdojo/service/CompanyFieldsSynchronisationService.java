@@ -1,4 +1,4 @@
-package codingdojo.service.sync;
+package codingdojo.service;
 
 import codingdojo.model.Company;
 import codingdojo.model.ExternalCompany;

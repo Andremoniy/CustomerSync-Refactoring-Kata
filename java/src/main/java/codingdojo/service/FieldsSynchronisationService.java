@@ -1,4 +1,4 @@
-package codingdojo.service.sync;
+package codingdojo.service;
 
 import codingdojo.model.Customer;
 import codingdojo.model.ExternalCustomer;

@@ -1,4 +1,4 @@
-package codingdojo.service.sync;
+package codingdojo.service;
 
 import codingdojo.exception.ConflictException;
 import codingdojo.model.Company;
@@ -6,8 +6,6 @@ import codingdojo.model.CustomerType;
 import codingdojo.model.ExternalCompany;
 import codingdojo.repository.CompanyRepository;
 import codingdojo.repository.ShoppingListRepository;
-import codingdojo.service.data.CompanyRepositoryService;
-import codingdojo.service.data.CustomerMatches;
 
 import java.util.Optional;
 
