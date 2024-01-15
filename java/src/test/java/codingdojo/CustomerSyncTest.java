@@ -1,6 +1,12 @@
 package codingdojo;
 
-import org.junit.jupiter.api.Assertions;
+import codingdojo.external.ExternalCustomer;
+import codingdojo.match.CustomerType;
+import codingdojo.misc.Address;
+import codingdojo.misc.Customer;
+import codingdojo.misc.CustomerDataLayer;
+import codingdojo.misc.ShoppingList;
+import codingdojo.sync.CustomerSync;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
@@ -23,7 +29,7 @@ public class CustomerSyncTest {
         customer.setExternalId(externalId);
 
         CustomerDataLayer db = mock(CustomerDataLayer.class);
-        when(db.findByExternalId(externalId)).thenReturn(customer);
+        when(db.find2(externalId)).thenReturn(customer);
         CustomerSync sut = new CustomerSync(db);
 
         // ACT
@@ -32,7 +38,7 @@ public class CustomerSyncTest {
         // ASSERT
         assertFalse(created);
         ArgumentCaptor<Customer> argument = ArgumentCaptor.forClass(Customer.class);
-        verify(db, atLeastOnce()).updateCustomerRecord(argument.capture());
+        verify(db, atLeastOnce()).upd(argument.capture());
         Customer updatedCustomer = argument.getValue();
         assertEquals(externalCustomer.getName(), updatedCustomer.getName());
         assertEquals(externalCustomer.getExternalId(), updatedCustomer.getExternalId());

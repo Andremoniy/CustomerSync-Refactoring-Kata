@@ -1,4 +1,7 @@
-package codingdojo;
+package codingdojo.external;
+
+import codingdojo.misc.Address;
+import codingdojo.misc.ShoppingList;
 
 import java.util.List;
 

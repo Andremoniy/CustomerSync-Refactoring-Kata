@@ -1,4 +1,4 @@
-package codingdojo;
+package codingdojo.misc;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +10,7 @@ public class ShoppingList {
         this.products = Arrays.asList(products);
     }
 
-    public List<String> getProducts() {
+    public List<String> getProductsList() {
         return products;
     }
 
