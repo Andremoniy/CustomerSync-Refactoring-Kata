@@ -1,4 +1,0 @@
-dataclasses-json
-coverage
-pyodbc
-dbtext
